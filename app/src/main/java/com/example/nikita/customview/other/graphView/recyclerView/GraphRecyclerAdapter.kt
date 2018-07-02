@@ -1,4 +1,4 @@
-package com.example.nikita.customview.presentetion.recyclerView
+package com.example.nikita.customview.other.graphView.recyclerView
 
 import android.graphics.Color
 import android.support.v7.widget.RecyclerView
@@ -9,7 +9,9 @@ import android.view.ViewGroup
 import com.example.nikita.customview.R
 import kotlinx.android.synthetic.main.graph_element.view.*
 
-class GraphRecyclerAdapter(private val graphElementArray: IntArray) : RecyclerView.Adapter<GraphRecyclerAdapter.GraphElement>() {
+class GraphRecyclerAdapter() : RecyclerView.Adapter<GraphRecyclerAdapter.GraphElement>() {
+
+    lateinit var graphElementArray: IntArray
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GraphElement {
         return GraphElement(LayoutInflater.from(parent.context).inflate(R.layout.graph_element, parent, false))
@@ -21,6 +23,11 @@ class GraphRecyclerAdapter(private val graphElementArray: IntArray) : RecyclerVi
 
     override fun onBindViewHolder(holder: GraphElement, position: Int) {
         holder.graphElement.layoutParams.height = graphElementArray[position]
+    }
+
+    fun updateGraphElements(arr: IntArray) {
+        graphElementArray = arr
+        notifyDataSetChanged()
     }
 
     class GraphElement(view: View) : RecyclerView.ViewHolder(view) {
